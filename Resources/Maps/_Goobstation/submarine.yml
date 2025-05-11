@@ -247304,7 +247304,7 @@ entities:
     - type: Transform
       pos: -58.257927,43.762005
       parent: 2
-- proto: TorsoSkeleton
+- proto: ChestSkeleton
   entities:
   - uid: 30078
     components:
