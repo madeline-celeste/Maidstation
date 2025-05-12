@@ -220673,7 +220673,7 @@ entities:
       linearDamping: 0
 - proto: WeaponShotgunKammerer
   entities:
-  - uid: 4964
+  - uid: 44964
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
