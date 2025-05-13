@@ -155588,16 +155588,6 @@ entities:
           showEnts: False
           occludes: True
           ent: 5257
-- proto: JermovCircuitBoard
-  entities:
-  - uid: 24032
-    components:
-    - type: Transform
-      pos: 8.949977,-90.97735
-      parent: 2
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
 - proto: JetpackBlueFilled
   entities:
   - uid: 24033

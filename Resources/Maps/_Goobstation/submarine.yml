@@ -106,6 +106,7 @@
 # SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
 # SPDX-FileCopyrightText: 2025 Aidenkrz <aiden@djkraz.com>
 # SPDX-FileCopyrightText: 2025 Aineias1 <dmitri.s.kiselev@gmail.com>
+# SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
 # SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
 # SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
@@ -199882,14 +199883,6 @@ entities:
     components:
     - type: Transform
       pos: -65.5,9.5
-      parent: 2
-- proto: JermovCircuitBoard
-  entities:
-  - uid: 12348
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 66.11412,44.716995
       parent: 2
 - proto: JetpackBlueFilled
   entities:
