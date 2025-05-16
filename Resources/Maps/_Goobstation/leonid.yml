@@ -54,11 +54,11 @@
 # SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Gallagin <64706450+Gallagin@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
+# SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
 # SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
 # SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-# SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -68,8 +68,8 @@ meta:
   engineVersion: 251.0.0
   forkId: ""
   forkVersion: ""
-  time: 05/08/2025 17:48:55
-  entityCount: 35354
+  time: 05/15/2025 09:15:55
+  entityCount: 35348
 maps:
 - 1
 grids:
@@ -14612,27 +14612,6 @@ entities:
       container: 10
 - proto: ActionToggleInternals
   entities:
-  - uid: 13
-    components:
-    - type: Transform
-      parent: 12
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 12
-  - uid: 16
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 15
-  - uid: 19
-    components:
-    - type: Transform
-      parent: 18
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 18
   - uid: 22
     components:
     - type: Transform
@@ -14668,29 +14647,6 @@ entities:
     - type: InstantAction
       originalIconColor: '#FFFFFFFF'
       container: 30
-- proto: ActionToggleJetpack
-  entities:
-  - uid: 14
-    components:
-    - type: Transform
-      parent: 12
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 12
-  - uid: 17
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 15
-  - uid: 20
-    components:
-    - type: Transform
-      parent: 18
-    - type: InstantAction
-      originalIconColor: '#FFFFFFFF'
-      container: 18
 - proto: ActionToggleLight
   entities:
   - uid: 37
@@ -43097,16 +43053,6 @@ entities:
     - type: Physics
       angularDamping: 0
       linearDamping: 0
-- proto: BoxEvidenceMarkers
-  entities:
-  - uid: 5154
-    components:
-    - type: Transform
-      pos: -76.12626,34.569363
-      parent: 2
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
 - proto: BoxFlashbang
   entities:
   - uid: 5155
@@ -43296,16 +43242,6 @@ entities:
     components:
     - type: Transform
       pos: -50.4081,3.5597954
-      parent: 2
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-- proto: BoxHandcuff
-  entities:
-  - uid: 5182
-    components:
-    - type: Transform
-      pos: -76.69624,34.63608
       parent: 2
     - type: Physics
       angularDamping: 0
@@ -100493,7 +100429,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -47.5,28.5
       parent: 2
-- proto: ClothingBackpackCentcom
+- proto: ClothingBackpackCentcomm
   entities:
   - uid: 16307
     components:
@@ -101215,6 +101151,11 @@ entities:
       parent: 2
 - proto: ClothingHeadHelmetRiot
   entities:
+  - uid: 17
+    components:
+    - type: Transform
+      pos: -79.40903,34.48622
+      parent: 2
   - uid: 16399
     components:
     - type: Transform
@@ -101227,14 +101168,6 @@ entities:
     components:
     - type: Transform
       pos: -79.65597,34.58267
-      parent: 2
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-  - uid: 16401
-    components:
-    - type: Transform
-      pos: -79.40597,34.53055
       parent: 2
     - type: Physics
       angularDamping: 0
@@ -101636,6 +101569,11 @@ entities:
       parent: 2
 - proto: ClothingOuterArmorRiot
   entities:
+  - uid: 18
+    components:
+    - type: Transform
+      pos: -79.38818,34.59046
+      parent: 2
   - uid: 16452
     components:
     - type: Transform
@@ -101807,6 +101745,18 @@ entities:
     - type: Physics
       angularDamping: 0
       linearDamping: 0
+- proto: ClothingOuterVoidsuitSecurity
+  entities:
+  - uid: 12
+    components:
+    - type: Transform
+      pos: -76.5299,34.50707
+      parent: 2
+  - uid: 14
+    components:
+    - type: Transform
+      pos: -76.5299,34.50707
+      parent: 2
 - proto: ClothingOuterWinterCoat
   entities:
   - uid: 16469
@@ -154312,6 +154262,13 @@ entities:
       angularDamping: 0
       linearDamping: 0
       bodyType: Static
+- proto: GunSafeLauncherNonLethal
+  entities:
+  - uid: 19
+    components:
+    - type: Transform
+      pos: -82.5,33.5
+      parent: 2
 - proto: GunSafeRifleLecter
   entities:
   - uid: 23849
@@ -155639,63 +155596,21 @@ entities:
       parent: 2
 - proto: JetpackSecurityFilled
   entities:
-  - uid: 12
+  - uid: 13
     components:
     - type: Transform
-      pos: -75.54293,34.600636
+      pos: -75.92544,34.67385
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 13
-    - type: Jetpack
-      toggleActionEntity: 14
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 14
-          - 13
   - uid: 15
     components:
     - type: Transform
-      pos: -75.44918,34.517242
+      pos: -75.73785,34.61131
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 16
-    - type: Jetpack
-      toggleActionEntity: 17
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 17
-          - 16
-  - uid: 18
+  - uid: 16
     components:
     - type: Transform
-      pos: -75.68876,34.69445
+      pos: -75.5711,34.53834
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 19
-    - type: Jetpack
-      toggleActionEntity: 20
-    - type: Physics
-      angularDamping: 0
-      linearDamping: 0
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 20
-          - 19
 - proto: JointRainbow
   entities:
   - uid: 24042
