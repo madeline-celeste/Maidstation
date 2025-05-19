@@ -102685,7 +102685,7 @@ entities:
     components:
     - type: Transform
       parent: 16616
-    - type: Artifact
+    - type: XenoArtifact
       isSuppressed: True
     - type: Physics
       angularDamping: 0
