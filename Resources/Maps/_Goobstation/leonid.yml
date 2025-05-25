@@ -102788,8 +102788,6 @@ entities:
     components:
     - type: Transform
       parent: 16616
-    - type: Artifact
-      isSuppressed: True
     - type: Physics
       angularDamping: 0
       linearDamping: 0
