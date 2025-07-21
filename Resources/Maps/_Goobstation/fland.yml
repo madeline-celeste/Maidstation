@@ -53,6 +53,7 @@
 # SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
 # SPDX-FileCopyrightText: 2025 GMWQ <garethquaile@gmail.com>
+# SPDX-FileCopyrightText: 2025 Gareth Quaile <garethquaile@gmail.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 OnsenCapy <101037138+OnsenCapy@users.noreply.github.com>
@@ -63,14 +64,15 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+
 meta:
   format: 7
   category: Map
   engineVersion: 260.2.0
   forkId: ""
   forkVersion: ""
-  time: 07/01/2025 20:35:53
-  entityCount: 35866
+  time: 07/17/2025 15:11:15
+  entityCount: 35874
 maps:
 - 1
 grids:
@@ -1193,6 +1195,8 @@ entities:
             9612: 46,1
             9613: 47,1
             9614: 48,1
+            9618: 31,26
+            9619: 33,14
         - node:
             cleanable: True
             color: '#FFFFFFFF'
@@ -21233,7 +21237,7 @@ entities:
       pos: 72.5,-11.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -62069.094
+      secondsUntilStateChange: -62731.184
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -97614,6 +97618,13 @@ entities:
     - type: Transform
       pos: -9.5,73.5
       parent: 2
+- proto: CrateContrabandStorageSecure
+  entities:
+  - uid: 15076
+    components:
+    - type: Transform
+      pos: 15.5,9.5
+      parent: 2
 - proto: CrateEmergencyO2Kit
   entities:
   - uid: 14986
@@ -98778,13 +98789,6 @@ entities:
           showEnts: False
           occludes: True
           ent: null
-- proto: CrateSecurityNonlethal
-  entities:
-  - uid: 15076
-    components:
-    - type: Transform
-      pos: 15.5,9.5
-      parent: 2
 - proto: CrateSecurityTrackingMindshieldImplants
   entities:
   - uid: 15077
@@ -110346,6 +110350,33 @@ entities:
     components:
     - type: Transform
       pos: 21.596437,36.347313
+      parent: 2
+- proto: DVSmartFridgeMedical
+  entities:
+  - uid: 28150
+    components:
+    - type: Transform
+      pos: -10.5,27.5
+      parent: 2
+  - uid: 28151
+    components:
+    - type: Transform
+      pos: -8.5,33.5
+      parent: 2
+  - uid: 28152
+    components:
+    - type: Transform
+      pos: 22.5,42.5
+      parent: 2
+  - uid: 28153
+    components:
+    - type: Transform
+      pos: 5.5,55.5
+      parent: 2
+  - uid: 28154
+    components:
+    - type: Transform
+      pos: 32.5,42.5
       parent: 2
 - proto: EmergencyLight
   entities:
@@ -167312,11 +167343,6 @@ entities:
     - type: Transform
       pos: 114.39373,20.545967
       parent: 2
-  - uid: 28009
-    components:
-    - type: Transform
-      pos: 47.591526,29.611954
-      parent: 2
 - proto: Morgue
   entities:
   - uid: 24921
@@ -169056,6 +169082,12 @@ entities:
     - type: Transform
       pos: 107.5,52.5
       parent: 2
+  - uid: 19576
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,24.5
+      parent: 2
   - uid: 24494
     components:
     - type: Transform
@@ -169207,6 +169239,60 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 112.5,44.5
+      parent: 2
+  - uid: 35775
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,22.5
+      parent: 2
+  - uid: 35776
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,23.5
+      parent: 2
+  - uid: 35777
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,21.5
+      parent: 2
+  - uid: 35869
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,20.5
+      parent: 2
+  - uid: 35870
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 52.5,20.5
+      parent: 2
+  - uid: 35871
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 52.5,21.5
+      parent: 2
+  - uid: 35872
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 52.5,22.5
+      parent: 2
+  - uid: 35873
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 52.5,23.5
+      parent: 2
+  - uid: 35874
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 52.5,24.5
       parent: 2
 - proto: PlasmaTankFilled
   entities:
@@ -170748,12 +170834,6 @@ entities:
       parent: 2
 - proto: PowerCellRecharger
   entities:
-  - uid: 19576
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 33.5,14.5
-      parent: 2
   - uid: 25410
     components:
     - type: Transform
@@ -170864,6 +170944,11 @@ entities:
     components:
     - type: Transform
       pos: 51.5,40.5
+      parent: 2
+  - uid: 35774
+    components:
+    - type: Transform
+      pos: 35.5,13.5
       parent: 2
 - proto: PowerCellSmallPrinted
   entities:
@@ -180101,6 +180186,18 @@ entities:
       parent: 2
 - proto: ReinforcedUraniumWindow
   entities:
+  - uid: 19628
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 99.5,-1.5
+      parent: 2
+  - uid: 24695
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 97.5,-1.5
+      parent: 2
   - uid: 26846
     components:
     - type: Transform
@@ -180112,6 +180209,24 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 75.5,37.5
+      parent: 2
+  - uid: 29398
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 97.5,-9.5
+      parent: 2
+  - uid: 31086
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 100.5,-5.5
+      parent: 2
+  - uid: 31213
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 99.5,-9.5
       parent: 2
 - proto: ReinforcedWindow
   entities:
@@ -183945,31 +184060,6 @@ entities:
     - type: Transform
       pos: 102.5,40.5
       parent: 2
-  - uid: 35770
-    components:
-    - type: Transform
-      pos: 99.5,-1.5
-      parent: 2
-  - uid: 35773
-    components:
-    - type: Transform
-      pos: 97.5,-1.5
-      parent: 2
-  - uid: 35774
-    components:
-    - type: Transform
-      pos: 99.5,-9.5
-      parent: 2
-  - uid: 35775
-    components:
-    - type: Transform
-      pos: 97.5,-9.5
-      parent: 2
-  - uid: 35776
-    components:
-    - type: Transform
-      pos: 100.5,-5.5
-      parent: 2
   - uid: 35807
     components:
     - type: Transform
@@ -187527,33 +187617,6 @@ entities:
     components:
     - type: Transform
       pos: 89.5,-62.5
-      parent: 2
-- proto: SmartFridge
-  entities:
-  - uid: 28150
-    components:
-    - type: Transform
-      pos: -10.5,27.5
-      parent: 2
-  - uid: 28151
-    components:
-    - type: Transform
-      pos: -8.5,33.5
-      parent: 2
-  - uid: 28152
-    components:
-    - type: Transform
-      pos: 22.5,42.5
-      parent: 2
-  - uid: 28153
-    components:
-    - type: Transform
-      pos: 5.5,55.5
-      parent: 2
-  - uid: 28154
-    components:
-    - type: Transform
-      pos: 32.5,42.5
       parent: 2
 - proto: SMESAdvanced
   entities:
@@ -195757,11 +195820,6 @@ entities:
     - type: Transform
       pos: -1.5,49.5
       parent: 2
-  - uid: 29398
-    components:
-    - type: Transform
-      pos: 31.5,26.5
-      parent: 2
   - uid: 29405
     components:
     - type: Transform
@@ -197162,22 +197220,10 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 49.5,25.5
       parent: 2
-  - uid: 31086
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 33.5,14.5
-      parent: 2
   - uid: 31202
     components:
     - type: Transform
       pos: 37.5,12.5
-      parent: 2
-  - uid: 31213
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 33.5,13.5
       parent: 2
   - uid: 31216
     components:
@@ -200660,6 +200706,20 @@ entities:
     - type: Transform
       pos: 9.462639,25.591267
       parent: 2
+- proto: TowelColorBlack
+  entities:
+  - uid: 35868
+    components:
+    - type: Transform
+      pos: 47.628128,29.416208
+      parent: 2
+- proto: TowelColorBrown
+  entities:
+  - uid: 31209
+    components:
+    - type: Transform
+      pos: 47.471878,29.718502
+      parent: 2
 - proto: TowelColorNT
   entities:
   - uid: 24702
@@ -200669,6 +200729,11 @@ entities:
       parent: 2
 - proto: TowelColorWhite
   entities:
+  - uid: 14590
+    components:
+    - type: Transform
+      pos: 51.71146,28.3217
+      parent: 2
   - uid: 27094
     components:
     - type: Transform
@@ -200783,17 +200848,17 @@ entities:
       rot: 3.141592653589793 rad
       pos: 43.5,8.5
       parent: 2
-  - uid: 31209
-    components:
-    - type: Transform
-      pos: 42.5,0.5
-      parent: 2
 - proto: TurnstileGenpopLeave
   entities:
   - uid: 24577
     components:
     - type: Transform
       pos: 41.5,8.5
+      parent: 2
+  - uid: 28009
+    components:
+    - type: Transform
+      pos: 42.5,0.5
       parent: 2
 - proto: TwoWayLever
   entities:
@@ -201738,6 +201803,18 @@ entities:
     components:
     - type: Transform
       pos: 56.5,-24.5
+      parent: 2
+- proto: VendingMachineSec
+  entities:
+  - uid: 35770
+    components:
+    - type: Transform
+      pos: 31.5,26.5
+      parent: 2
+  - uid: 35773
+    components:
+    - type: Transform
+      pos: 33.5,14.5
       parent: 2
 - proto: VendingMachineSecDrobe
   entities:
@@ -225643,11 +225720,6 @@ entities:
       rot: 3.141592653589793 rad
       pos: 35.5,14.5
       parent: 2
-  - uid: 19628
-    components:
-    - type: Transform
-      pos: 31.5,26.5
-      parent: 2
   - uid: 25029
     components:
     - type: Transform
@@ -225738,12 +225810,6 @@ entities:
     components:
     - type: Transform
       pos: 50.5,7.5
-      parent: 2
-  - uid: 35777
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 35.5,13.5
       parent: 2
 - proto: WeaponDisabler
   entities:
