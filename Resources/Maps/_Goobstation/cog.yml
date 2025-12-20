@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 262.0.0
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/04/2025 14:57:13
-  entityCount: 31758
+  time: 11/23/2025 09:41:49
+  entityCount: 31765
 maps:
 - 1
 grids:
@@ -476,6 +476,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -11875,6 +11880,7 @@ entities:
     - type: RadiationGridResistance
     - type: NavMap
     - type: ImplicitRoof
+    - type: FTLDrive
 - proto: AccordionInstrument
   entities:
   - uid: 15401
@@ -15182,7 +15188,7 @@ entities:
       pos: 26.5,17.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -68451.586
+      secondsUntilStateChange: -68590.57
       state: Opening
     - type: DeviceLinkSink
       invokeCounter: 1
@@ -16280,7 +16286,7 @@ entities:
       pos: 41.5,62.5
       parent: 12
     - type: Door
-      secondsUntilStateChange: -25718.27
+      secondsUntilStateChange: -25857.254
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -21344,13 +21350,6 @@ entities:
     components:
     - type: Transform
       pos: 77.5,50.5
-      parent: 12
-- proto: BiomassReclaimer
-  entities:
-  - uid: 17145
-    components:
-    - type: Transform
-      pos: -43.5,-41.5
       parent: 12
 - proto: BirdToyInstrument
   entities:
@@ -78762,8 +78761,8 @@ entities:
           restitution: 0
           friction: 0.4
     - type: EntityStorage
-      open: True
       removedMasks: 20
+      open: True
     - type: PlaceableSurface
       isPlaceable: True
   - uid: 25352
@@ -79021,11 +79020,6 @@ entities:
       parent: 12
 - proto: ClosetL3ScienceFilled
   entities:
-  - uid: 1568
-    components:
-    - type: Transform
-      pos: -45.5,-42.5
-      parent: 12
   - uid: 1744
     components:
     - type: Transform
@@ -79050,11 +79044,6 @@ entities:
     components:
     - type: Transform
       pos: -35.5,-22.5
-      parent: 12
-  - uid: 15167
-    components:
-    - type: Transform
-      pos: -45.5,-41.5
       parent: 12
 - proto: ClosetL3SecurityFilled
   entities:
@@ -79270,8 +79259,8 @@ entities:
           restitution: 0
           friction: 0.4
     - type: EntityStorage
-      open: True
       removedMasks: 20
+      open: True
     - type: PlaceableSurface
       isPlaceable: True
   - uid: 20856
@@ -79481,11 +79470,6 @@ entities:
       parent: 12
 - proto: ClosetRadiationSuitFilled
   entities:
-  - uid: 1520
-    components:
-    - type: Transform
-      pos: -40.5,-41.5
-      parent: 12
   - uid: 2315
     components:
     - type: Transform
@@ -79629,6 +79613,13 @@ entities:
     components:
     - type: Transform
       pos: 47.5,-4.5
+      parent: 12
+- proto: ClothingBeltChemBagXenobiology
+  entities:
+  - uid: 23447
+    components:
+    - type: Transform
+      pos: -40.6208,-49.27347
       parent: 12
 - proto: ClothingBeltMedicalEMTFilled
   entities:
@@ -80238,6 +80229,19 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
+- proto: ClothingMultipleHeadphones
+  entities:
+  - uid: 27908
+    components:
+    - type: Transform
+      pos: -25.446548,64.671776
+      parent: 12
+  - uid: 29599
+    components:
+    - type: Transform
+      rot: -6.283185307179586 rad
+      pos: -50.5738,76.70312
+      parent: 12
 - proto: ClothingNeckCloakAce
   entities:
   - uid: 18303
@@ -80251,19 +80255,6 @@ entities:
     components:
     - type: Transform
       pos: -0.13286686,29.66557
-      parent: 12
-- proto: ClothingNeckHeadphones
-  entities:
-  - uid: 27908
-    components:
-    - type: Transform
-      pos: -25.446548,64.671776
-      parent: 12
-  - uid: 29599
-    components:
-    - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -50.5738,76.70312
       parent: 12
 - proto: ClothingNeckScarfStripedBlue
   entities:
@@ -81740,6 +81731,14 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 54.5,-26.5
+      parent: 12
+- proto: ComputerScienceXenobiologyBounty
+  entities:
+  - uid: 23445
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -41.5,-49.5
       parent: 12
 - proto: ComputerShuttleCargo
   entities:
@@ -101186,16 +101185,6 @@ entities:
     components:
     - type: Transform
       pos: -13.48246,53.407932
-      parent: 12
-  - uid: 22631
-    components:
-    - type: Transform
-      pos: -40.30378,-49.254826
-      parent: 12
-  - uid: 22632
-    components:
-    - type: Transform
-      pos: -40.52253,-49.4267
       parent: 12
 - proto: FoodApple
   entities:
@@ -145980,6 +145969,23 @@ entities:
     - type: Transform
       pos: -42.5,-30.5
       parent: 12
+- proto: LockerScienceFilledXenobiology
+  entities:
+  - uid: 1568
+    components:
+    - type: Transform
+      pos: -45.5,-41.5
+      parent: 12
+  - uid: 15167
+    components:
+    - type: Transform
+      pos: -45.5,-42.5
+      parent: 12
+  - uid: 17089
+    components:
+    - type: Transform
+      pos: -40.5,-41.5
+      parent: 12
 - proto: LockerScientist
   entities:
   - uid: 9298
@@ -166201,6 +166207,25 @@ entities:
     - type: Transform
       pos: 54.49004,14.54105
       parent: 12
+- proto: SlimeGrinder
+  entities:
+  - uid: 1520
+    components:
+    - type: Transform
+      pos: -43.5,-41.5
+      parent: 12
+- proto: SlimeScannerXenobio
+  entities:
+  - uid: 22632
+    components:
+    - type: Transform
+      pos: -37.4958,-42.96097
+      parent: 12
+  - uid: 23444
+    components:
+    - type: Transform
+      pos: -37.3083,-43.46097
+      parent: 12
 - proto: SMESAdvanced
   entities:
   - uid: 2682
@@ -168924,7 +168949,7 @@ entities:
       parent: 12
 - proto: SpawnPointVirologist
   entities:
-  - uid: 23444
+  - uid: 234440
     components:
     - type: Transform
       pos: -12.5,-59.5
@@ -173322,11 +173347,6 @@ entities:
     components:
     - type: Transform
       pos: -34.5,-44.5
-      parent: 12
-  - uid: 17089
-    components:
-    - type: Transform
-      pos: -41.5,-49.5
       parent: 12
   - uid: 17099
     components:
@@ -198463,8 +198483,8 @@ entities:
           restitution: 0
           friction: 0.4
     - type: EntityStorage
-      open: True
       removedMasks: 20
+      open: True
     - type: PlaceableSurface
       isPlaceable: True
 - proto: WardrobeBotanistFilled
@@ -201850,6 +201870,43 @@ entities:
     components:
     - type: Transform
       pos: -23.775642,-15.327034
+      parent: 12
+- proto: XenobioSlimeBabySpawner
+  entities:
+  - uid: 17145
+    components:
+    - type: Transform
+      pos: -45.5,-45.5
+      parent: 12
+  - uid: 22631
+    components:
+    - type: Transform
+      pos: -44.5,-46.5
+      parent: 12
+  - uid: 23449
+    components:
+    - type: Transform
+      pos: -45.5,-48.5
+      parent: 12
+  - uid: 23450
+    components:
+    - type: Transform
+      pos: -37.5,-46.5
+      parent: 12
+  - uid: 23451
+    components:
+    - type: Transform
+      pos: -38.5,-48.5
+      parent: 12
+  - uid: 23452
+    components:
+    - type: Transform
+      pos: -37.5,-48.5
+      parent: 12
+  - uid: 23453
+    components:
+    - type: Transform
+      pos: -37.5,-49.5
       parent: 12
 - proto: Zipties
   entities:
