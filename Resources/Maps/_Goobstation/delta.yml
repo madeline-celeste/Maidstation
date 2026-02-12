@@ -129729,7 +129729,7 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -28.666578,45.60487
       parent: 2
-- proto: SmartFridgeMedical
+- proto: DVSmartFridgeMedical
   entities:
   - uid: 17737
     components:
