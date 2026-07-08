@@ -23660,3 +23660,9 @@ Entries:
         bugs threads in the discord and report things breaking for fixes.
   id: 2715
   time: '2026-07-04T02:14:46.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Fixed materials not actually being added to storages.
+  id: 2716
+  time: '2026-07-08T16:21:43.0000000+00:00'
