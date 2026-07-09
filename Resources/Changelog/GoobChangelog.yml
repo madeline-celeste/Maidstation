@@ -23744,3 +23744,13 @@ Entries:
       message: Combat boot values from high heeled boots
   id: 2722
   time: '2026-07-09T21:17:49.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Ore Processor no longer vaporizes mats.
+    - type: Fix
+      message: >-
+        Fixed Ore Processor "Claim points" button overlapping with materials
+        list.
+  id: 2723
+  time: '2026-07-09T21:31:10.0000000+00:00'
