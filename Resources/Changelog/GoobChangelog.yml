@@ -23690,3 +23690,11 @@ Entries:
       message: Doubled Silo range
   id: 2718
   time: '2026-07-09T11:18:09.0000000+00:00'
+- author: elioskmil
+  changes:
+    - type: Fix
+      message: >-
+        fixed a bug that prevented players from using the RPD to build straight
+        and bent pipes on top of eachother even if they were rotated.
+  id: 2719
+  time: '2026-07-09T11:18:36.0000000+00:00'
