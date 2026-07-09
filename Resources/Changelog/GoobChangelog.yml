@@ -23710,3 +23710,37 @@ Entries:
       message: Fix IPC not having their charge updated
   id: 2721
   time: '2026-07-09T11:20:02.0000000+00:00'
+- author: Beanyboi69
+  changes:
+    - type: Add
+      message: >-
+        Added a bunch of existing jumpsuits and clothing options to some job
+        loadouts
+    - type: Add
+      message: Added a bunch of unused envirosuits to assistant and job loadouts.
+    - type: Add
+      message: New military jumpsuits!
+    - type: Add
+      message: >-
+        Recruit jumpsuit to assistant loadout. Can only be worn with under 5
+        hours of playtime.
+    - type: Fix
+      message: >-
+        Replaced filled advanced jackboots with empty advanced jackboots in HoS
+        loadout
+    - type: Fix
+      message: Warden no longer spawns with an extra secmask
+    - type: Tweak
+      message: Medical doctors must select eyewear
+    - type: Tweak
+      message: NTR fancy jumpsuit now has a 20 hour playtime requirement
+    - type: Tweak
+      message: >-
+        Recolored various military jumpsuits to be more accurate to the jobs
+        they represent.
+    - type: Remove
+      message: Removed Eyewear section from CMO loadout
+    - type: Remove
+      message: Combat boot values from high heeled boots
+  id: 2722
+  time: '2026-07-09T21:17:49.0000000+00:00'
