@@ -23682,3 +23682,11 @@ Entries:
       message: fix random sentience localization error
   id: 2717
   time: '2026-07-08T19:35:44.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Fixed most lathes not being able to be linked to the Silo.
+    - type: Tweak
+      message: Doubled Silo range
+  id: 2718
+  time: '2026-07-09T11:18:09.0000000+00:00'
