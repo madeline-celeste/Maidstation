@@ -23780,3 +23780,9 @@ Entries:
       message: Fixed being unable to use modsuit
   id: 2727
   time: '2026-07-10T12:44:01.0000000+00:00'
+- author: Aviu
+  changes:
+    - type: Fix
+      message: Fix eating organs as flesh heretic not empowering/healing you.
+  id: 2728
+  time: '2026-07-10T12:45:09.0000000+00:00'
