@@ -23760,3 +23760,11 @@ Entries:
       message: Mothership core now understand every language
   id: 2724
   time: '2026-07-10T07:34:03.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: >-
+        Fixed a bug where when one AI tried to control another's B.O.R.I.S it
+        would kick them out and ghost them.
+  id: 2725
+  time: '2026-07-10T07:35:13.0000000+00:00'
