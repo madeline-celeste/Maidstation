@@ -23754,3 +23754,9 @@ Entries:
         list.
   id: 2723
   time: '2026-07-09T21:31:10.0000000+00:00'
+- author: Kenkaitos
+  changes:
+    - type: Fix
+      message: Mothership core now understand every language
+  id: 2724
+  time: '2026-07-10T07:34:03.0000000+00:00'
