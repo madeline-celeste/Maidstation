@@ -23786,3 +23786,9 @@ Entries:
       message: Fix eating organs as flesh heretic not empowering/healing you.
   id: 2728
   time: '2026-07-10T12:45:09.0000000+00:00'
+- author: Sarahon
+  changes:
+    - type: Add
+      message: Burping
+  id: 2729
+  time: '2026-07-10T12:46:15.0000000+00:00'
