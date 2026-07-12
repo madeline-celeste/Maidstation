@@ -23798,3 +23798,9 @@ Entries:
       message: Fixed health analzyer giving false info
   id: 2730
   time: '2026-07-12T00:11:24.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Fix
+      message: Fixed some lathes being connected to imaginary silos.
+  id: 2731
+  time: '2026-07-12T00:12:11.0000000+00:00'
