@@ -23810,3 +23810,9 @@ Entries:
       message: Changed Ardent Censer fuel to be Holy Water
   id: 2732
   time: '2026-07-12T00:12:29.0000000+00:00'
+- author: lucapgiannotti
+  changes:
+    - type: Fix
+      message: harpy flight functional once more!
+  id: 2733
+  time: '2026-07-12T00:13:13.0000000+00:00'
