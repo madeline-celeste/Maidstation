@@ -23838,3 +23838,9 @@ Entries:
       message: z, e, and left click work to open paper when in hand
   id: 2736
   time: '2026-07-12T00:17:00.0000000+00:00'
+- author: Kenkaitos
+  changes:
+    - type: Remove
+      message: Removed Exo station from the map rotation.
+  id: 2737
+  time: '2026-07-15T03:02:45.0000000+00:00'
