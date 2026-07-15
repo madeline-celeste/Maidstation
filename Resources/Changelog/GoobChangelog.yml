@@ -23861,3 +23861,15 @@ Entries:
       message: Atmos devices can be stacked in different rotations now
   id: 2739
   time: '2026-07-15T03:05:06.0000000+00:00'
+- author: rivermyth
+  changes:
+    - type: Tweak
+      message: >-
+        Reworked zombification and the cure to use polymorphs, should make it
+        work better but report any bugs with it!
+    - type: Fix
+      message: Fixed zombie cure cure not activating.
+    - type: Fix
+      message: Fixed zombies not being able to be cured while dead.
+  id: 2740
+  time: '2026-07-15T03:05:49.0000000+00:00'
