@@ -23873,3 +23873,9 @@ Entries:
       message: Fixed zombies not being able to be cured while dead.
   id: 2740
   time: '2026-07-15T03:05:49.0000000+00:00'
+- author: Baptr0b0t
+  changes:
+    - type: Fix
+      message: Fixed the drunk IPC who couldn't string ten words together.
+  id: 2741
+  time: '2026-07-15T03:06:40.0000000+00:00'
