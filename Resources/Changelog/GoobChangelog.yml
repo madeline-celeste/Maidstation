@@ -23844,3 +23844,12 @@ Entries:
       message: Removed Exo station from the map rotation.
   id: 2737
   time: '2026-07-15T03:02:45.0000000+00:00'
+- author: Baptr0b0t
+  changes:
+    - type: Fix
+      message: >-
+        Fixed gemini having bloodstream, injectable solution, surgery,
+        polymorph, destructible, temperature, respirator, internals, dna,
+        fingerprint...
+  id: 2738
+  time: '2026-07-15T03:03:30.0000000+00:00'
