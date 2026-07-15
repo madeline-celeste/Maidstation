@@ -23853,3 +23853,11 @@ Entries:
         fingerprint...
   id: 2738
   time: '2026-07-15T03:03:30.0000000+00:00'
+- author: elioskmil
+  changes:
+    - type: Fix
+      message: Atmos devices can be stacked in different configs now
+    - type: Fix
+      message: Atmos devices can be stacked in different rotations now
+  id: 2739
+  time: '2026-07-15T03:05:06.0000000+00:00'
