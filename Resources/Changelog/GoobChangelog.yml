@@ -23903,3 +23903,9 @@ Entries:
       message: Fix zombie cure not properly handling errors.
   id: 2745
   time: '2026-07-16T02:58:03.0000000+00:00'
+- author: SkippyMcSkips
+  changes:
+    - type: Fix
+      message: Fixed Janitor's Key Ring not fitting in Janitor's Belt
+  id: 2746
+  time: '2026-07-16T02:58:36.0000000+00:00'
