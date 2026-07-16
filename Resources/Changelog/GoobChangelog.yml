@@ -23885,3 +23885,9 @@ Entries:
       message: Fixed shotgun that require manual cycle!
   id: 2742
   time: '2026-07-15T21:02:54.0000000+00:00'
+- author: elioskmil
+  changes:
+    - type: Fix
+      message: Anomaly Generators can be filled with plasma sheets now.
+  id: 2743
+  time: '2026-07-16T02:56:09.0000000+00:00'
