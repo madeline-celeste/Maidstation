@@ -23891,3 +23891,9 @@ Entries:
       message: Anomaly Generators can be filled with plasma sheets now.
   id: 2743
   time: '2026-07-16T02:56:09.0000000+00:00'
+- author: Naxel11
+  changes:
+    - type: Tweak
+      message: Damage distribution across the entire body is no longer randomized.
+  id: 2744
+  time: '2026-07-16T02:56:26.0000000+00:00'
