@@ -1,0 +1,47 @@
+<!--
+SPDX-License-Identifier: MIT
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+                           xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls;assembly=Content.Client"
+                           xmlns:ui="clr-namespace:Content.Client.Options.UI;assembly=Content.Client"
+                           Title="{Loc 'telescience-teleporter-console-window-title'}"
+                           SetSize="350 175"
+                           Resizable="False">
+    <BoxContainer Orientation="Vertical"
+                Margin="5">
+
+        <BoxContainer HorizontalAlignment="Center">
+            <Label Text="Status: "/>
+            <Label Name="TeleporterStatus"
+                HorizontalAlignment="Center"
+                FontColorOverride="#FFA500"
+                Text="Idle"/>
+        </BoxContainer>
+
+        <BoxContainer Name="RegimeContainer">
+            <Label Text="Regime: "/>
+            <OptionButton
+                Name="RegimeOption"
+                MinWidth="40"/>
+        </BoxContainer>
+
+        <BoxContainer Name="TargetContainer">
+            <Label Text="Target: "/>
+            <OptionButton
+                Name="TargetOption"
+                MinWidth="40"/>
+        </BoxContainer>
+
+        <BoxContainer>
+            <Label Text="Calibration: "/>
+            <Label Name="TeleporterCalibrationStatus"
+                HorizontalAlignment="Center"
+                FontColorOverride="#fc030b"
+                Text="Suboptimal"/>
+        </BoxContainer>
+        
+        <Button Name="CalibrateButton" Text="Calibrate" HorizontalAlignment="Right"/>
+
+    </BoxContainer>
+</controls:FancyWindow>

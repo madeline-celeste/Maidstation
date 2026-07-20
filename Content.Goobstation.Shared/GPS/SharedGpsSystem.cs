@@ -1,4 +1,5 @@
 using Content.Goobstation.Shared.GPS.Components;
+using Content.Goobstation.Shared.Telescience.Teleporter.Events;
 using Content.Shared.UserInterface;
 using Robust.Shared.Timing;
 
@@ -21,6 +22,9 @@ public abstract class SharedGpsSystem : EntitySystem
         SubscribeLocalEvent<GPSComponent, GpsSetEnabledMessage>(OnSetEnabled);
 
         SubscribeLocalEvent<GPSComponent, AfterAutoHandleStateEvent>(OnHandleState);
+
+        SubscribeLocalEvent<GPSComponent, GetTeleportBeaconDisplayNameEvent>(OnGetBeaconName);
+        SubscribeLocalEvent<DiscoverTeleportBeaconsEvent>(OnDiscoverBeacons);
     }
 
     private void OnHandleState(Entity<GPSComponent> ent, ref AfterAutoHandleStateEvent args)
@@ -60,6 +64,16 @@ public abstract class SharedGpsSystem : EntitySystem
         DirtyField(ent.Owner, ent.Comp, nameof(GPSComponent.Enabled));
         UpdateUi(ent);
     }
+
+    private void OnDiscoverBeacons(ref DiscoverTeleportBeaconsEvent args)
+    {
+        EntityQueryEnumerator<GPSComponent> query = EntityQueryEnumerator<GPSComponent>();
+        while (query.MoveNext(out EntityUid uid, out GPSComponent? comp))
+            if (comp.Enabled)
+                args.Entities.Add(uid);
+    }
+    private void OnGetBeaconName(Entity<GPSComponent> ent, ref GetTeleportBeaconDisplayNameEvent args)
+        => Loc.GetString("telescience-teleporter-target-name-gps", ("name", ent.Comp.GpsName));
 
     protected virtual void UpdateUi(Entity<GPSComponent> ent) { }
 }

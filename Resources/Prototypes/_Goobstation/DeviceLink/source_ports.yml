@@ -175,3 +175,17 @@
   id: StationRadioServerPort
   name: signal-port-name-radio-server
   description: signal-port-description-radio-server
+
+# Telescience
+
+- type: sourcePort
+  id: TeleporterHubLink
+  name: signal-port-name-teleporter-station-hub-link
+  description: signal-port-description-teleporter-station-hub-link
+  defaultLinks: [ TeleporterHub ]
+
+- type: sourcePort
+  id: TeleporterStationLink
+  name: signal-port-name-teleporter-controller-station-link
+  description: signal-port-description-teleporter-controller-station-link
+  defaultLinks: [ TeleporterStation ]

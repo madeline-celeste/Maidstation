@@ -142,3 +142,15 @@
   id: StationRadioRigPort
   name: signal-port-name-radio-rig
   description: signal-port-description-radio-rig
+
+# Telescience
+
+- type: sinkPort
+  id: TeleporterHub
+  name: signal-port-name-teleporter-hub
+  description: signal-port-description-teleporter-hub
+
+- type: sinkPort
+  id: TeleporterStation
+  name: signal-port-description-teleporter-station
+  description: signal-port-description-teleporter-station

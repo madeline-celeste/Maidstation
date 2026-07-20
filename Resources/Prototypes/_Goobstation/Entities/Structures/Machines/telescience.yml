@@ -1,0 +1,158 @@
+- type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  id: MachineTeleporterStation
+  name: teleporter station
+  description: The power control station for a bluespace teleporter. Used for toggling power, and can activate a test-fire to prevent malfunctions. 
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Structures/Machines/comms_transmitter.rsi
+    snapCardinals: true
+    layers:
+    - state: base
+    - state: transmitter-on
+      visible: false
+      map: ["powered-state"]
+  - type: PointLight
+    enabled: false
+    castShadows: false
+    radius: 1.5
+    energy: 1.6
+    color: "#39b8ee"
+  - type: LitOnPowered
+  - type: GenericVisualizer
+    visuals:
+      enum.PowerDeviceVisuals.Powered:
+        powered-state:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Appearance
+  - type: AmbientOnPowered
+  - type: AmbientSound
+    volume: -9
+    range: 5
+    enabled: false
+    sound:
+      path: /Audio/Ambience/Objects/server_fans.ogg
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.4,-0.4,0.4,0.4"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:ChangeConstructionNodeBehavior
+        node: machineFrame
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Transform
+    anchored: true
+  - type: Pullable
+  - type: TeleporterStation
+  - type: DeviceLinkSource
+    range: 2
+    ports:
+    - TeleporterHubLink
+  - type: DeviceLinkSink
+    ports:
+      - TeleporterStation
+  #- type: Machine
+  #  board: TelescienceTeleporterHubCircuitboard
+
+- type: entity
+  id: MachineTeleporterHub
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: teleporter hub
+  description: It's the hub of a teleporting machine.
+  components:
+  - type: InteractionOutline
+  - type: Physics
+    bodyType: Static
+    canCollide: false
+  - type: Transform
+    anchored: true
+    noRot: true
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.00"
+        density: 190
+        mask:
+          - MachineMask
+  - type: Sprite
+    sprite: Structures/cargo_telepad.rsi
+    drawdepth: HighFloorObjects
+    layers:
+    - state: offline
+      map: [ "enum.CargoTelepadLayers.Base" ]
+    - state: idle
+      map: [ "enum.CargoTelepadLayers.Beam" ]
+      shader: unshaded
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
+  - type: WirelessNetworkConnection
+    range: 200
+  - type: ApcPowerReceiver
+    powerLoad: 1000 # TODO make it spike power draw when teleporting
+  - type: Machine
+    #board: CargoTelepadMachineCircuitboard
+  - type: Appearance
+  - type: CollideOnAnchor
+  - type: NameIdentifier
+    group: CargoTelepads
+  - type: AnimationPlayer
+  - type: DeviceLinkSink
+    ports:
+      - TeleporterHub
+  - type: TeleporterHub
+
+- type: entity
+  parent: BaseComputer
+  id: ComputerTeleporterControl
+  name: teleporter control console
+  description: Used to control a linked teleportation Hub and Station.
+  components:
+  - type: AccessReader
+#    access:
+#    - [ Command ]
+#  - type: EmergencyShuttleConsole
+  - type: ActivatableUI
+    key: enum.TeleporterConsoleUiKey.Key
+  - type: UserInterface
+    interfaces:
+        enum.TeleporterConsoleUiKey.Key:
+          type: TeleporterConsoleBoundUserInterface
+        enum.WiresUiKey.Key:
+          type: WiresBoundUserInterface
+  - type: PointLight
+    radius: 1.5
+    energy: 4.0
+    color: "#43ccb5"
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Pai
+  - type: DeviceLinkSource
+    range: 2
+    ports:
+    - TeleporterStationLink
+  - type: TeleporterController
