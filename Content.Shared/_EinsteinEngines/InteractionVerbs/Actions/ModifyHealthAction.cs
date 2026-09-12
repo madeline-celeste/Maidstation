@@ -28,6 +28,6 @@ public sealed partial class ModifyHealthAction : InteractionAction
     public override bool Perform(InteractionArgs args, InteractionVerbPrototype proto, VerbDependencies deps)
     {
         return deps.EntMan.System<DamageableSystem>()
-            .TryChangeDamage(args.Target, Damage, IgnoreResistance, origin: args.User) is true;
+            .TryChangeDamage(args.Target, Damage, IgnoreResistance, origin: args.User);
     }
 }
