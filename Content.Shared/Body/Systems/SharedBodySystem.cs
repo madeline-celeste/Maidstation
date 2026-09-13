@@ -1,26 +1,9 @@
-
-// TRAVELERS BEWARE:
-// They are lying.
-// They are lying.
-// They are lying.
-// They are lying. 
-// They are lying.
-// They are lying.
-// They are lying.
-// They are lying.
-// too much of this is goob. who knows how much???
-
-using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-
-// Shitmed Change
-using Content.Goobstation.Common.Body;
-using Content.Shared.Inventory;
 
 namespace Content.Shared.Body.Systems;
 
@@ -45,7 +28,7 @@ public abstract partial class SharedBodySystem : EntitySystem
     /// </summary>
     public const string OrganSlotContainerIdPrefix = "body_organ_slot_";
 
-    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private   readonly IGameTiming _timing = default!;
     [Dependency] protected readonly IPrototypeManager Prototypes = default!;
     [Dependency] protected readonly DamageableSystem Damageable = default!;
     [Dependency] protected readonly MovementSpeedModifierSystem Movement = default!;
@@ -53,8 +36,7 @@ public abstract partial class SharedBodySystem : EntitySystem
     [Dependency] protected readonly SharedTransformSystem SharedTransform = default!;
     [Dependency] protected readonly StandingStateSystem Standing = default!;
     // <Shitmed>
-    [Dependency] private readonly CommonInsideBodyPartSystem _insideBodyPart = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!;
+
     // </Shitmed>
 
     public override void Initialize()
@@ -64,10 +46,8 @@ public abstract partial class SharedBodySystem : EntitySystem
         InitializeBody();
         InitializeParts();
         InitializeOrgans();
-        // Shitmed Change Start
-        InitializePartAppearances();
-        InitializeRelay();
-        // Shitmed Change End
+
+        InitializeWoundmed(); // Woundmed
     }
 
     /// <summary>

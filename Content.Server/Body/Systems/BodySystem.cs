@@ -139,7 +139,7 @@ public sealed partial class BodySystem : SharedBodySystem // Shitmed change: mad
             return new HashSet<EntityUid>();
 
         var gibs = base.GibBody(bodyId, gibOrgans, body, launchGibs: launchGibs, splatDirection: splatDirection,
-            splatModifier: splatModifier, splatCone: splatCone, gib: gib, contents: contents,
+            splatModifier: splatModifier, splatCone: splatCone, gibType: gib, contents: contents,
             allowedContainers: allowedContainers, excludedContainers: excludedContainers); // Shitmed Change
 
         var ev = new BeingGibbedEvent(gibs);

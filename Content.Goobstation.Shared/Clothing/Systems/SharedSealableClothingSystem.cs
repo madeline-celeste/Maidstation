@@ -23,6 +23,9 @@ using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 using Vector2 = System.Numerics.Vector2;
 using Content.Shared.Silicons.StationAi;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 
 
 namespace Content.Goobstation.Shared.Clothing.Systems;
@@ -47,6 +50,7 @@ public abstract class SharedSealableClothingSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     [Dependency] private readonly InventorySystem _inventorySystem = default!;
     [Dependency] private readonly SharedTransformSystem _transformSystem = default!;
+    [Dependency] private readonly SharedInternalsSystem _internals = default!;
 
     public override void Initialize()
     {
@@ -72,11 +76,28 @@ public abstract class SharedSealableClothingSystem : EntitySystem
 
         SubscribeLocalEvent<SealableClothingComponent, OnAttachedUnequipAttemptEvent>(OnAttachedUnequipAttemptSealCheck);
 
-
-
+        SubscribeLocalEvent<BreathToolComponent, ComponentInit>(OnBreathToolInit);
     }
 
     #region Events
+
+    // Update component state on component toggle
+    private void OnBreathToolInit(Entity<BreathToolComponent> ent, ref ComponentInit args)
+    {
+        var comp = ent.Comp;
+
+        if (!_inventorySystem.TryGetContainingEntity(ent.Owner, out var parent) || !_inventorySystem.TryGetContainingSlot(ent.Owner, out var slot))
+            return;
+
+        if ((slot.SlotFlags & comp.AllowedSlots) == 0)
+            return;
+
+        if (TryComp(parent, out InternalsComponent? internals))
+        {
+            ent.Comp.ConnectedInternalsEntity = parent;
+            _internals.ConnectBreathTool((parent.Value, internals), ent);
+        }
+    }
 
     /// <summary>
     /// Toggles components on part when suit complete sealing process

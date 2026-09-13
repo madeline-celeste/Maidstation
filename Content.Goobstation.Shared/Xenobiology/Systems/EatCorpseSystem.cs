@@ -144,7 +144,7 @@ public sealed partial class EatCorpseSystem : EntitySystem
 
         if (toRemove == rootPart.Value.Owner)
         {
-            _body.GibBody(target, gib: GibType.Drop);
+            _body.GibBody(target, gibType: GibType.Drop);
             RemComp<BeingEatenComponent>(target);
             return;
         }

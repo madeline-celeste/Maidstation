@@ -1,13 +1,3 @@
-using Content.Goobstation.Common.Bloodstream;
-using Content.Goobstation.Common.CCVar; // Goobstation
-using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Shitmed.Body;
-using Content.Shared._Shitmed.Damage;
-using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
-using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
-using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
-using Content.Shared._Shitmed.Targeting;
-using System.Linq;
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
@@ -18,6 +8,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.EntityEffects.Effects.Solution;
+using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared.Fluids;
 using Content.Shared.Forensics.Components;
 using Content.Shared.HealthExaminable;
@@ -31,9 +22,14 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Shared._Shitmed.Targeting;
+using Content.Shared._Shitmed.Damage;
+using Content.Goobstation.Common.Bloodstream;
+using Content.Shared._Shitmed.Body;
+using System.Linq;
 
 namespace Content.Shared.Body.Systems;
-// todo marty clean up this warzone.
+
 public abstract partial class SharedBloodstreamSystem : EntitySystem
 {
     public static readonly EntProtoId Bloodloss = "StatusEffectBloodloss";
@@ -48,8 +44,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     [Dependency] private readonly AlertsSystem _alertsSystem = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
-
-    private float _bloodlossMultiplier = 4f; // Goobstation
 
     public override void Initialize()
     {
@@ -66,9 +60,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
         SubscribeLocalEvent<BloodstreamComponent, RejuvenateEvent>(OnRejuvenate);
         SubscribeLocalEvent<BloodstreamComponent, MetabolismExclusionEvent>(OnMetabolismExclusion);
 
-        InitializeWounds();
-
-        Subs.CVar(_cfg, GoobCVars.BleedMultiplier, value => _bloodlossMultiplier = value, true); // Goobstation
+        InitializeWoundmed(); // Woundmed
     }
 
     public override void Update(float frameTime)
@@ -102,14 +94,15 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
                     // bloodloss damage is based on the base value, and modified by how low your blood level is.
                     var amt = bloodstream.BloodlossDamage / (0.1f + bloodPercentage);
 
-                    // Goob start
+                    // <Goob>
+                    // currently only used for spill blood spell
                     var multiplierEv = new GetBloodlossDamageMultiplierEvent();
                     RaiseLocalEvent(uid, multiplierEv);
                     amt *= multiplierEv.Multiplier;
-                    // Goob end
+                    // </Goob>
 
                     _damageableSystem.TryChangeDamage(uid, amt, ignoreResistances: false, interruptsDoAfters: false,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Goob - shitmed edit
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll, targetPart: TargetBodyPart.All); // Woundmed targeting
 
                     // Apply dizziness as a symptom of bloodloss.
                     // The effect is applied in a way that it will never be cleared without being healthy.
@@ -121,12 +114,12 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
                     // If they're healthy, we'll try and heal some bloodloss instead.
                     _damageableSystem.TryChangeDamage(
                         uid,
-                        bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier, // Goobstation
+                        bloodstream.BloodlossHealDamage * bloodPercentage * _bloodlossMultiplier, // Goob - multiplier
                         ignoreResistances: true,
                         interruptsDoAfters: false,
-                        ignoreBlockers: true,
-                        targetPart: TargetBodyPart.All,
-                        splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
+                        ignoreBlockers: true, // Woundmed
+                        targetPart: TargetBodyPart.All, // Woundmed - targeting
+                        splitDamage: SplitDamageBehavior.SplitEnsureAll); // Woundmed - targeting
 
                     _status.TryRemoveStatusEffect(uid, Bloodloss);
                 }
@@ -135,68 +128,9 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             {
                 TickBleed((uid, bloodstream));
             }
-
-            // Shitmed Change Start
-            var total = FixedPoint2.Zero;
-            foreach (var (bodyPart, _) in _body.GetBodyChildren(uid))
-            {
-                var totalPartBleeds = FixedPoint2.Zero; // Goobstation
-                foreach (var (wound, _) in _wound.GetWoundableWounds(bodyPart))
-                {
-                    if (!TryComp<BleedInflicterComponent>(wound, out var bleeds))
-                        continue;
-
-                    total += bleeds.BleedingAmount;
-                    totalPartBleeds += bleeds.BleedingAmount; // Goobstation
-                }
-
-                if (TryComp<WoundableComponent>(bodyPart, out var woundable)
-                    && woundable.Bleeds != totalPartBleeds) // Goobstation
-                {
-                    woundable.Bleeds = totalPartBleeds; // Goobstation
-                    Dirty(bodyPart, woundable); // Goobstation
-                }
-            }
-
-            var missingBlood = bloodstream.BloodReferenceSolution.Volume - bloodstream.BloodSolution.Value.Comp.Solution.Volume;
-
-            bloodstream.BleedAmountFromWounds = (float) total; // why was it ever divided by 4? Goobstation
-
-            if (_consciousness.TryGetNerveSystem(uid, out var nerveSys))
-            {
-                if (!_consciousness.SetConsciousnessModifier(
-                        uid,
-                        nerveSys.Value,
-                        -missingBlood / 4,
-                        identifier: "Bleeding",
-                        type: ConsciousnessModType.Pain))
-                {
-                    _consciousness.AddConsciousnessModifier(
-                        uid,
-                        nerveSys.Value,
-                        -missingBlood / 4,
-                        identifier: "Bleeding",
-                        type: ConsciousnessModType.Pain);
-                }
-            }
-            // Shitmed Change End
-            // Goobstation start
-            bloodstream.BleedAmount = bloodstream.BleedAmountFromWounds + bloodstream.BleedAmountNotFromWounds;
-            bloodstream.BleedAmount = Math.Clamp(bloodstream.BleedAmount, 0, bloodstream.MaxBleedAmount);
-
-            DirtyFields(uid, bloodstream, null, nameof(BloodstreamComponent.BleedAmount), nameof(BloodstreamComponent.BleedAmountFromWounds));
-
-            if (bloodstream.BleedAmount == 0)
-                _alertsSystem.ClearAlert(uid, bloodstream.BleedingAlert);
-            else
-            {
-                var severity = (short) Math.Clamp(Math.Round(bloodstream.BleedAmount, MidpointRounding.ToZero), 0, 10);
-                _alertsSystem.ShowAlert(uid, bloodstream.BleedingAlert, severity);
-            }
-            // Goobstation end
         }
 
-        UpdateWounds(frameTime);
+        UpdateWoundmed(); // Woundmed;
     }
 
     private void OnMapInit(Entity<BloodstreamComponent> ent, ref MapInitEvent args)
@@ -281,11 +215,15 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             return;
 
         // Does the calculation of how much bleed rate should be added/removed, then applies it
-        var oldBleedAmount = ent.Comp.BleedAmountNotFromWounds; // Goobstation
+        var oldBleedAmount = ent.Comp.BleedAmountNotFromWounds; // Woundmed - use NotFromWounds instead
         var total = bloodloss.GetTotal();
         var totalFloat = total.Float();
-        if (TryComp<BodyComponent>(ent, out var body) && body.BodyType == BodyType.Simple) // Goobstation
-            TryModifyBleedAmount(ent.AsNullable(), totalFloat); // Goobstation - do not apply base bleed to woundmed supported bodies
+        // <Woundmed>
+        // wrap this in an if statement to make sure we only do this simple logic to simple bodies
+        // do not apply base bleed to woundmed supported bodies
+        if (TryComp<BodyComponent>(ent, out var body) && body.BodyType == BodyType.Simple)
+            TryModifyBleedAmount(ent.AsNullable(), totalFloat);
+        // </Woundmed>
 
         /// Critical hit. Causes target to lose blood, using the bleed rate modifier of the weapon, currently divided by 5
         /// The crit chance is currently the bleed rate modifier divided by 25.
@@ -497,11 +435,11 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             return false;
 
         referenceFactor = Math.Clamp(referenceFactor, 0f, ent.Comp.MaxVolumeModifier);
-        var ratio = (float) amount / (float) ent.Comp.BloodReferenceSolution.Volume; // Goobstation - added float so 1/300 is not 0..
+
         foreach (var (referenceReagent, referenceQuantity) in ent.Comp.BloodReferenceSolution)
         {
             var error = referenceQuantity * referenceFactor - bloodSolution.GetTotalPrototypeQuantity(referenceReagent.Prototype);
-            var adjustedAmount = referenceQuantity * ratio;
+            var adjustedAmount = amount * referenceQuantity / ent.Comp.BloodReferenceSolution.Volume;
 
             if (error > 0)
             {
@@ -557,6 +495,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
 
         if (tempSolution.Volume > ent.Comp.BleedPuddleThreshold)
         {
+            // <Goobstation>
             // Pass some of the chemstream into the spilled blood.
             if (SolutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution))
             {
@@ -564,14 +503,13 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
                 tempSolution.AddSolution(temp, PrototypeManager);
             }
 
-            // Goobstation start
             // Set the freshness when the spill is created instead of every time new blood is created
             foreach (var dna in tempSolution
                 .SelectMany(r => r.Reagent.EnsureReagentData().OfType<DnaData>()))
             {
                 dna.Freshness = _timing.CurTime;
             }
-            // Goobstation end
+            // </Goobstation>
 
             _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
 
@@ -591,22 +529,21 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 
-        // Goobstation start
+        // <Woundmed> Change to use NotFromWounds
         ent.Comp.BleedAmountNotFromWounds += amount;
+        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmountNotFromWounds, 0, ent.Comp.MaxBleedAmount);
+        ent.Comp.BleedAmountNotFromWounds = Math.Max(ent.Comp.BleedAmountNotFromWounds, 0);
+        // </Woundmed>
 
+        // <Woundmed>
         if (amount <= 0 && TryComp<BodyComponent>(ent, out var body)
             && body.BodyType == BodyType.Complex)
         {
             _wound.TryHealMostSevereBleedingWoundables(ent, -amount, out var _);
         }
-
-        // Clamp minimum bleed to zero
-        ent.Comp.BleedAmountNotFromWounds = Math.Max(ent.Comp.BleedAmountNotFromWounds, 0);
-
-        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmountFromWounds + ent.Comp.BleedAmountNotFromWounds, 0, ent.Comp.MaxBleedAmount);
-
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmountNotFromWounds));
-        // Goobstation end
+        // </Woundmed>
+
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
 
         if (ent.Comp.BleedAmount == 0)
@@ -658,8 +595,9 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
     }
 
     /// <summary>
+    /// [Goob Edited]
     /// Change what someone's blood is made of, on the fly.
-    /// Goob: this will set their max blood level according to their current species's BloodReferenceSolution.
+    /// [Goob: this will set their max blood level according to their current species's BloodReferenceSolution.]
     /// </summary>
     public void ChangeBloodReagents(Entity<BloodstreamComponent?> ent, Solution reagents)
     {
@@ -681,20 +619,24 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             currentVolume += bloodSolution.RemoveReagent(reagent.Reagent, quantity: bloodSolution.Volume, ignoreReagentData: true);
         }
 
-        // ent.Comp.BloodReferenceSolution = reagents.Clone(); // Goob, scaling max according to original volume; see below
+        //ent.Comp.BloodReferenceSolution = reagents.Clone(); // Goob, scaling max according to original volume; see below
 
-        // Goob start: appropriately scale the target's BloodReferenceSolution according to their previous max volume
+        // <Goob>
+        // appropriately scale the target's BloodReferenceSolution according to their previous max volume
         var referenceSolution = reagents.Clone();
-        referenceSolution.ScaleSolution(ent.Comp.BloodReferenceSolution.MaxVolume / referenceSolution.Volume); // Using the old max to scale the reference solution up/down
-        referenceSolution.MaxVolume = ent.Comp.BloodReferenceSolution.MaxVolume; // This doesn't actually affect blood regeneration, but it'd be slopcode if I didn't set this
+        // Using the old max to scale the reference solution up/down
+        referenceSolution.ScaleSolution(ent.Comp.BloodReferenceSolution.MaxVolume / referenceSolution.Volume);
+        // This doesn't actually affect blood regeneration, but it'd be slopcode if I didn't set this
+        referenceSolution.MaxVolume = ent.Comp.BloodReferenceSolution.MaxVolume;
         ent.Comp.BloodReferenceSolution = referenceSolution;
-        // Goob end
-        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BloodReferenceSolution));
+        // </Goob>
 
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BloodReferenceSolution));
 
         if (currentVolume == FixedPoint2.Zero)
             return;
 
+        //var solution = ent.Comp.BloodReferenceSolution.Clone();
         var solution = reagents.Clone(); // Goob, adjusted due to above fixes; this acts the same otherwise
         solution.ScaleSolution(currentVolume / solution.Volume);
         SolutionContainer.AddSolution(ent.Comp.BloodSolution.Value, solution);

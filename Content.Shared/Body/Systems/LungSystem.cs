@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Atmos.EntitySystems;
@@ -7,7 +5,6 @@ using Content.Shared.Body.Components;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Inventory;
 using Content.Shared.Inventory.Events;
 using Robust.Shared.Prototypes;
 using BreathToolComponent = Content.Shared.Atmos.Components.BreathToolComponent;
@@ -19,14 +16,12 @@ public sealed class LungSystem : EntitySystem
 {
     [Dependency] private readonly SharedAtmosphereSystem _atmos = default!;
     [Dependency] private readonly SharedInternalsSystem _internals = default!;
-    [Dependency] private readonly InventorySystem _inventory = default!; // Goobstaiton
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<LungComponent, ComponentInit>(OnComponentInit);
-        SubscribeLocalEvent<BreathToolComponent, ComponentInit>(OnBreathToolInit); // Goobstation - Modsuits - Update on component toggle
         SubscribeLocalEvent<BreathToolComponent, GotEquippedEvent>(OnGotEquipped);
         SubscribeLocalEvent<BreathToolComponent, GotUnequippedEvent>(OnGotUnequipped);
     }
@@ -56,24 +51,6 @@ public sealed class LungSystem : EntitySystem
         {
             solution.MaxVolume = 100.0f;
             solution.CanReact = false; // No dexalin lungs
-        }
-    }
-
-    // Goobstation - Update component state on component toggle
-    private void OnBreathToolInit(Entity<BreathToolComponent> ent, ref ComponentInit args)
-    {
-        var comp = ent.Comp;
-
-        if (!_inventory.TryGetContainingEntity(ent.Owner, out var parent) || !_inventory.TryGetContainingSlot(ent.Owner, out var slot))
-            return;
-
-        if ((slot.SlotFlags & comp.AllowedSlots) == 0)
-            return;
-
-        if (TryComp(parent, out InternalsComponent? internals))
-        {
-            ent.Comp.ConnectedInternalsEntity = parent;
-            _internals.ConnectBreathTool((parent.Value, internals), ent);
         }
     }
 

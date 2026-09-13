@@ -12,7 +12,7 @@ namespace Content.Shared.Body.Part
     public enum BodyPartType: byte
     {
         Other = 0,
-        // Goobstation start
+        // Shitmed start
         Chest = 1 << 0,
         Groin = 1 << 1,
         Head = 1 << 2,
@@ -22,6 +22,6 @@ namespace Content.Shared.Body.Part
         Foot = 1 << 6,
         Tail = 1 << 7,
         Vital = Chest | Groin | Head
-        // Goobstation end
+        // Shitmed end
     }
 }

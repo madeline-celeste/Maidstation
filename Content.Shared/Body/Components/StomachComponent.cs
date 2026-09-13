@@ -1,5 +1,3 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reagent;
@@ -54,7 +52,7 @@ namespace Content.Shared.Body.Components
         ///     transferred to <see cref="BloodstreamComponent"/>
         /// </summary>
         [DataField]
-        [Access(Other = AccessPermissions.ReadWriteExecute)] // Goobstation
+        [Access(Other = AccessPermissions.ReadWriteExecute)] // Goob shitcode - stupid flesh heretic needs this rn
         public TimeSpan DigestionDelay = TimeSpan.FromSeconds(20);
 
         /// <summary>

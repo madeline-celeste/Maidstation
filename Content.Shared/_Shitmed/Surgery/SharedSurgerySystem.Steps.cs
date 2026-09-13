@@ -356,12 +356,16 @@ public abstract partial class SharedSurgerySystem
 
         EnsureComp<OrganReattachedComponent>(args.Tool);
 
-        if (insertedOrgan.OriginalBody == args.Body)
-            return;
+        // TODO SHITMED: this is fucking slop. i am removing it because i dont see the point
+        // i am assuming it is meant to apply organ damage when you attach, but this should just
+        // happen regardless if the organ used to exist in that body or not..?
+        // maybe this breaks something wii shall see
+        //if (insertedOrgan.OriginalBody == args.Body)
+        //    return;
 
         var ev = new SurgeryStepDamageChangeEvent(args.User, args.Body, args.Part, ent);
-            RaiseLocalEvent(ent, ref ev);
-            args.Complete = true;
+        RaiseLocalEvent(ent, ref ev);
+        args.Complete = true;
     }
 
     private void OnAddOrganCheck(Entity<SurgeryAddOrganStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
